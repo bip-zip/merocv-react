@@ -48,15 +48,15 @@ const registerUser = async (e) => {
               src="/images/pic5.png"
               alt="My Image"
             />
-            <h5 className='fw-light mb-0'>Find your dream job @<a className='text-decoration-none' href="https://jobaxle.com/">JobAxle.com</a> </h5>
+            <h5 className='fw-light mb-0'>Land your dream job @<a className='text-decoration-none' href="https://jobaxle.com/">JobAxle.com</a> </h5>
 
           </div>
           <div className="col-lg-4 mx-auto ">
           <div className="bg-white shadow p-3 pb-4 loginbox">
             <div className="text-center">
             <img
-              height={110}
-              src="/images/logo.png"
+              height={50}
+              src="/logo.svg"
               alt="My Image"
             />
            

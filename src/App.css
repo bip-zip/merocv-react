@@ -29,7 +29,8 @@ body{
   background: linear-gradient(90deg, rgba(2,0,36,1) 10%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 80%);
 } */
 .bg-blue{
-  background-color: #47B5FF;
+  background-color: #3983FA;
+  /* background-color: #0667D0; */
   /* background-color: #DBF3FA; */
   /* background-color: #B7E9F7; */
 } 
@@ -38,9 +39,20 @@ body{
   margin-bottom: 100px;
 }
 .btn-blue{
-    background-color: #47B5FF;
+    background-color: #3983FA;
     border: none;
     color: #ffffff;
     padding: 5px;
     border-radius: 5px;
+}
+
+.btn-blue:hover{
+  background-color: #0667D0;
+
+}
+
+.cvsample:hover .cvimg{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border: none;
+  transition:0.5s
 }

@@ -23,9 +23,9 @@ const loginUser = async (e) => {
   try {
     const result = await axios.post(url, userData);
     if (result.status == 200) {
-      toast.success('Login Succes.');
+      toast.success('logged in.');
       localStorage.setItem('token',result.data.token)
-      navigate('/home');
+      navigate('/marketplace');
 
     } else {
       toast.error('Server Error: ' + result.data.message);
@@ -53,8 +53,8 @@ const loginUser = async (e) => {
           <div className="bg-white shadow p-3 pb-4 loginbox">
             <div className="text-center">
             <img
-              height={110}
-              src="/images/logo.png"
+              height={50}
+              src="/logo.svg"
               alt="My Image"
             />
            
