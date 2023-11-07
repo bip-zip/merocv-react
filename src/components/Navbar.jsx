@@ -38,7 +38,7 @@ function Navbar() {
       <Link to='/marketplace' className="nav-link">marketplace</Link>
     </li>
     <li class="nav-item">
-      <Link class="nav-link active " aria-current="page" to="/signup">your details</Link>
+      <Link class="nav-link active " aria-current="page" to="/userdetails/user-info">your details</Link>
     </li>
     
     <li class="nav-item">

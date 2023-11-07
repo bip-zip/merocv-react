@@ -6,6 +6,7 @@ import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
 import { Toaster } from 'react-hot-toast';
 import MarketPlace from './components/cv/MarketPlace';
+import UserDetail from './components/userdetails/UserDetail';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
       <Route path='/' element={<Login/>}></Route>
       <Route path='/signup' element={<Signup/>}></Route>
       <Route path='/marketplace' element={<MarketPlace/>}></Route>
+      <Route path='/userdetails/:tab' element={<UserDetail/>}></Route>
       {/* <Route path="/book-detail/:bookId" element={<BookDetail/>} ></Route> */}
     
     </Routes>
