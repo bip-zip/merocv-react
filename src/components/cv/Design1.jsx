@@ -1,9 +1,76 @@
-import React from 'react'
 import './design1.css';
 import PdfDownloader from './PdfDownloader';
-function Design1() {
+import React, { useState, useEffect } from 'react';
+import axios from "axios"
+import { useNavigate } from 'react-router-dom';
+import apiUrl from '../../config';
+import dateFormat from 'dateformat';
 
+function Design1() {
+  const url = apiUrl+'/cv/userinfo'
+  const navigate = useNavigate();
+  const [firstname, setFirstName] = useState('');
+  const [lastname, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [contact, setContact] = useState('');
+  const [address, setAddress] = useState('');
+  const [summary, setSummary] = useState('');
+  const [image, setImage] = useState('');
+
+const [skills, setSkills] = useState([])
+const [experiences, setExperiences] = useState([])
+const [education, setEducation] = useState([])
+
+  const config = {
+    headers: {
+      Authorization: "Token " + localStorage.getItem('token')
+    }
+  };
+  const getSkills = async () => {
+    const skFromServer = await axios.get(apiUrl+'/cv/skills', config)
+    setSkills(skFromServer.data)
+}
+  const getEducation = async () => {
+    const eduFromServer = await axios.get(apiUrl+'/cv/education', config)
+    setEducation(eduFromServer.data)
+}
+  const getExperiences = async () => {
+    const expFromServer = await axios.get(apiUrl+'/cv/experiences', config)
+    setExperiences(expFromServer.data)
+}
+
+   useEffect(() => {
+    axios.get(url, config)
+      .then((response) => {
+        if (response.status === 200) {
+          const result = response.data;
+          setFirstName(result.firstname);
+          setLastName(result.lastname);
+          setEmail(result.email);
+          setContact(result.contact);
+          setAddress(result.address);
+          setSummary(result.summary);
+          setImage(apiUrl + result.image);
+        } else {
+          console.error("Request failed with status:", response.status);
+          // Handle the error or set default values if needed
+        }
+      })
+      .catch((error) => {
+        console.error("Request failed with an error:", error);
+        // Handle the error or set default values if needed
+      });
+
+
+
+      getEducation();
+      getSkills();
+      getExperiences();
   
+  }, []);
+
+
+
 
 
 
@@ -18,42 +85,30 @@ function Design1() {
 <section class="resume " id='design1'>
 	<div class="resume_left">
 	    <div class="r_profile_pic">
-	      <img src="/images/pic1.png" alt="profile_pic" />
+	      <img src={image} alt="profile_pic" />
 	    </div>
 	    <div class="r_left_sub">
       <div class="r_info">
 	      <ul>
 	        <li>
-	          <p>alexwood@gmail.com</p>
+	          <p>{email}</p>
 	        </li>
 	        <li>
-	          <p>+15 120 5677684</p>
+	          <p>{contact}</p>
 	        </li>
 	        <li>
-	          <p>Kathmandu</p>
+	          <p>{address}</p>
 	        </li>
 	      </ul>
 	    </div>
 	      <div class="r_skills">
 	        <h4>Skills</h4>
 	        <ul>
-	         
-	          <li>
-	           
-	            Webhgfhdfhfdhdfh 
-	          </li>
-	          <li>
-	           
-	            Video Editing
-	          </li>
-	          <li>
-	          
-	         Sound Mixing
-	          </li>
-	          <li>
-	         
-	           Photoshop Editing
-	          </li>
+          {skills.map((sk, index) => ( 
+                  <li id={index}> 
+                  {sk.skill}
+                  </li>
+          ))}
 	        </ul>
 	      </div>
 	      
@@ -61,77 +116,48 @@ function Design1() {
 	</div>
 	<div class="resume_right">
 	    <div class="r_namerole">
-	      <p>Alexander Wood</p>
+	      <p>{firstname} {lastname}</p>
 	      <p class="role">Web Developer</p>
 	    </div>
       <div class="r_aboutme">
 	       
-	        <small>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa earum optio id iure reprehenderit accusamus quisquam accusantium nulla? Dolorum ipsa sed perspiciatis nemo aliquam quibusdam, alias quae totam nulla nihil.</small>
+	        <small>{summary}</small>
 	      </div>
 	    
 	    <div class="r_right_sub">
 	      <div class="r_education">
 	        <h4>Education</h4>
 	        <ul>
+          {education.map((edu, index) => ( 
+
 	          <li>
 	            <div class="r_ed_left">
-	              <p>2010-2013</p>
+	              <p>{edu.degree}</p>
 	            </div>
 	            <div class="r_ed_right">
-	              <p>Web Masters College</p>
-	              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa earum optio id iure reprehenderit</p>
+	              <p>{edu.institution}</p>
+	              <p>Year of Completion: {dateFormat(edu.completion_date, "yyyy")} with {edu.grade} grade. </p>
 	            </div>
 	          </li>
-	          <li>
-	            <div class="r_ed_left">
-	              <p>2013-2017</p>
-	            </div>
-	            <div class="r_ed_right">
-	              <p>Web Designing College</p>
-	              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa earum optio id iure reprehenderit</p>
-	            </div>
-	          </li>
-	          <li>
-	            <div class="r_ed_left">
-	              <p>2017-2018</p>
-	            </div>
-	            <div class="r_ed_right">
-	              <p>Video Designing College</p>
-	              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa earum optio id iure reprehenderit</p>
-	            </div>
-	          </li>
+          ))}
+	         
 	        </ul>
 	      </div>
 	      <div class="r_jobs">
 	        <h4>Work Experience</h4>
 	        <ul>
+          {experiences.map((ex, index) => ( 
 	          <li>
 	            <div class="r_ed_left">
-	              <p>2015-2017</p>
+	              <p>{dateFormat(ex.start_date, "yyyy")}-{dateFormat(ex.end_date, "yyyy")}</p>
 	            </div>
 	            <div class="r_ed_right">
-	              <p>Google</p>
-	              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa earum optio id iure reprehenderit</p>
+	              <p>{ex.company}</p>
+	              <p>{ex.responsibility} as <b>{ex.role}</b>.</p>
 	            </div>
 	          </li>
-	          <li>
-	            <div class="r_ed_left">
-	              <p>2017-2019</p>
-	            </div>
-	            <div class="r_ed_right">
-	              <p>Facebook</p>
-	              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa earum optio id iure reprehenderit</p>
-	            </div>
-	          </li>
-	          <li>
-	            <div class="r_ed_left">
-	              <p>2019-2022</p>
-	            </div>
-	            <div class="r_ed_right">
-	              <p>Instagram</p>
-	              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa earum optio id iure reprehenderit</p>
-	            </div>
-	          </li>
+          ))}
+	         
 	        </ul>
 	      </div>
 	    </div>
@@ -144,6 +170,7 @@ function Design1() {
             <PdfDownloader
              downloadFileName="MeroCV-Design1" 
              rootElementId="design1" 
+             imageUrl={image}
             />
           </div>
         </div>
