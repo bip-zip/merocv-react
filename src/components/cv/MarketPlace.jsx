@@ -10,7 +10,7 @@ function MarketPlace() {
         </div> <hr />
         <div className="row mb-5 mt-5">
           <div className="col-lg-3 me-5 cvsample  py-2 text-center">
-           <Link className='text-decoration-none'>
+           <Link className='text-decoration-none' to='/design1'>
            <img height={300} className='cvimg border' src="/images/cv1.jpg" alt="" />
             <p className="p-2 text-dark">Design: Saral✅</p></Link>
           </div>
