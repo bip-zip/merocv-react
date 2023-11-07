@@ -4,6 +4,8 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import WorkExperience from "./WorkExperience";
 import { Link, useLocation } from 'react-router-dom';
 import Education from "./Education";
+import Certification from "./Certification";
+import Skill from "./Skill";
 
 function UserDetail() {
   const location = useLocation();
@@ -49,10 +51,10 @@ function UserDetail() {
          <Education/>
         </TabPanel>
         <TabPanel>
-          <p>Tab 3 works!</p>
+         <Certification/>
         </TabPanel>
         <TabPanel>
-          <p>Tab 3 works!</p>
+          <Skill/>
         </TabPanel>
       </Tabs>
     </>
