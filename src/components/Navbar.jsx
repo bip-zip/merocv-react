@@ -42,7 +42,7 @@ function Navbar() {
     </li>
     
     <li class="nav-item">
-      <a style={{"cursor":"pointer"}} class="nav-link "  onClick={userLogout} title='signout'>username <i className="fa-solid fa-right-to-bracket"></i></a>
+      <a style={{"cursor":"pointer"}} class="nav-link "  onClick={userLogout} title='signout'>{localStorage.getItem('username')} <i className="fa-solid fa-right-to-bracket"></i></a>
     </li>
    
   </ul>

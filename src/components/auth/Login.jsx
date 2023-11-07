@@ -25,6 +25,7 @@ const loginUser = async (e) => {
     if (result.status == 200) {
       toast.success('logged in.');
       localStorage.setItem('token',result.data.token)
+      localStorage.setItem('username',result.data.username)
       navigate('/marketplace');
 
     } else {
