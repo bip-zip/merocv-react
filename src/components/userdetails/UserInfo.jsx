@@ -10,6 +10,7 @@ const url = apiUrl+'/cv/userinfo'
   const navigate = useNavigate();
   const [firstname, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
+  const [role, setRole] = useState('');
   const [email, setEmail] = useState('');
   const [contact, setContact] = useState('');
   const [address, setAddress] = useState('');
@@ -41,6 +42,7 @@ const url = apiUrl+'/cv/userinfo'
           console.log(result);
           setFirstName(result.firstname);
           setLastName(result.lastname);
+          setRole(result.role);
           setEmail(result.email);
           setContact(result.contact);
           setAddress(result.address);
@@ -66,6 +68,7 @@ const url = apiUrl+'/cv/userinfo'
     const formData = new FormData();
     formData.append('firstname', firstname);
     formData.append('lastname', lastname);
+    formData.append('role', role);
     formData.append('email', email);
     formData.append('contact', contact);
     formData.append('address', address);
@@ -109,6 +112,10 @@ return <div>
     </div>
     <div class="mb-3">
       <input placeholder='Last Name' type="text" required value={lastname} onChange={(e) => setLastName(e.target.value)} class="form-control" id="exampleEmail1" aria-describedby="emailHelp" />
+
+    </div>
+    <div class="mb-3">
+      <input placeholder='Role in CV' type="text" required value={role} onChange={(e) => setRole(e.target.value)} class="form-control"  aria-describedby="emailHelp" />
 
     </div>
     <div class="mb-3 ">

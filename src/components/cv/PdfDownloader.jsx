@@ -15,10 +15,11 @@ const PdfDownloader = ({ rootElementId, downloadFileName, imageUrl }) => {
         image: { type: 'jpeg', quality: 1 }, // Set image quality to 1.0 (highest quality)
       };
 
-      html2canvas(input, {
+      html2canvas(input,  {
         scale: 1, // Adjust scale as needed
         windowWidth: document.documentElement.offsetWidth, // Set the page width
         windowHeight: document.documentElement.offsetHeight, // Set the page height
+        useCORS: true
       }).then((canvas) => {
         const imgData = canvas.toDataURL('image/jpeg', pdfOptions.image.quality);
         const pdf = new jsPDF('p', 'mm', [367, 210]);

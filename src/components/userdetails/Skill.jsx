@@ -63,6 +63,22 @@ const [skills, setSkills] = useState([])
     }
 
 }
+const deleteSkill = (skill_id) => {
+  axios.delete(url +"/"+skill_id , config).then((result) => {
+      if (result.status == 204) {
+          toast.success("skill removed")
+          getSkills();
+          navigate('/userdetails/skills')
+      }
+      else {
+          toast.error("Internal server error")
+
+      }
+  }).catch((e) => {
+      toast.error("Something went wrong!")
+
+  })
+}
 
 return <div>
     
@@ -82,7 +98,7 @@ return <div>
 
 </div>
 
-<div className='col-lg-7 mx-auto p-4 shadow-sm mb-4 mt-3 rounded-3' >
+{skills.length > 0 ?<div className='col-lg-7 mx-auto p-4 shadow-sm mb-4 mt-3 rounded-3' >
 {skills.map((skill, index) => (
                         <div className=' my-2'>
                            
@@ -100,12 +116,12 @@ return <div>
                                 
                                 
                                 <div>
-                                    <button className='btn btn-sm btn-danger'>x</button>
+                                    <button className='btn btn-sm btn-danger' onClick={()=> {deleteSkill(skill.id)}}>x</button>
                                 </div>
                             </div>
                         </div>
                     ))}
-</div>
+</div>:<></>}
 
 
 

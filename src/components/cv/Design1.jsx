@@ -11,6 +11,7 @@ function Design1() {
   const navigate = useNavigate();
   const [firstname, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
+  const [role, setRole] = useState('');
   const [email, setEmail] = useState('');
   const [contact, setContact] = useState('');
   const [address, setAddress] = useState('');
@@ -46,6 +47,7 @@ const [education, setEducation] = useState([])
           const result = response.data;
           setFirstName(result.firstname);
           setLastName(result.lastname);
+          setRole(result.role);
           setEmail(result.email);
           setContact(result.contact);
           setAddress(result.address);
@@ -117,7 +119,7 @@ const [education, setEducation] = useState([])
 	<div class="resume_right">
 	    <div class="r_namerole">
 	      <p>{firstname} {lastname}</p>
-	      <p class="role">Web Developer</p>
+	      <p class="role">{role}</p>
 	    </div>
       <div class="r_aboutme">
 	       

@@ -8,7 +8,7 @@ function Education() {
 const url = apiUrl+'/cv/education'
 
 
-const [experiences, setExperiences] = useState([])
+const [education, setEducation] = useState([])
   const navigate = useNavigate();
   const [institution, setInstitute] = useState('');
   const [address, setAddress] = useState('');
@@ -24,15 +24,31 @@ const [experiences, setExperiences] = useState([])
       };
 
 
-      const getExperiences = async () => {
+      const getEducation = async () => {
         const expFromServer = await axios.get(url, config)
-        setExperiences(expFromServer.data)
+        setEducation(expFromServer.data)
     }
 
   useEffect(() => {
     
-    getExperiences();
+    getEducation();
 }, [])
+
+const deleteEdu = (cert_id) => {
+  axios.delete(url +"/"+cert_id , config).then((result) => {
+      if (result.status == 204) {
+          toast.success("certifications removed")
+          getEducation();
+      }
+      else {
+          toast.error("Internal server error")
+
+      }
+  }).catch((e) => {
+      toast.error("Something went wrong!")
+
+  })
+}
 
 
   const handleSubmit = async (e) => {
@@ -58,7 +74,7 @@ const [experiences, setExperiences] = useState([])
       if (response.status == 201) {
         // Successful response handling
         navigate('/userdetails/education');
-        getExperiences();
+        getEducation();
         toast.success('Data saved successfully');
       } else {
         // Handle other response statuses as needed
@@ -108,8 +124,8 @@ return <div>
 
 </div>
 
-<div className='col-lg-7 mx-auto p-4 shadow-sm mb-4 mt-3 rounded-3' >
-{experiences.map((exp, index) => (
+{education.length>0?<div className='col-lg-7 mx-auto p-4 shadow-sm mb-4 mt-3 rounded-3' >
+{education.map((exp, index) => (
                         <div className=' my-2'>
                            
                             <div className="d-flex justify-content-between ">
@@ -130,12 +146,12 @@ return <div>
                                     <p>{exp.grade}</p>
                                 </div>
                                 <div>
-                                    <button className='btn btn-sm btn-danger'>x</button>
+                                    <button onClick={()=> {deleteEdu(exp.id)}}  className='btn btn-sm btn-danger'>x</button>
                                 </div>
                             </div>
                         </div>
                     ))}
-</div>
+</div>:<></>}
 
 
 
