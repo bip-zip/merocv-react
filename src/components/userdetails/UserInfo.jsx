@@ -47,8 +47,14 @@ const url = apiUrl+'/cv/userinfo'
           setContact(result.contact);
           setAddress(result.address);
           setSummary(result.summary);
-          setImage(apiUrl + result.image);
+          if(result.image == null){
+            setImage(null);
+          setDimage(null);
+
+          }else{
+            setImage(apiUrl + result.image);
           setDimage(apiUrl + result.image);
+          }
           console.log(apiUrl + result.image);
         } else {
           console.error("Request failed with status:", response.status);
@@ -124,7 +130,7 @@ return <div>
     </div>
     <div class="mb-3 ">
     
-      <input placeholder='Contact' type="text" required  value={contact} onChange={(e) => setContact(e.target.value)}  className="form-control" id='desc' />
+      <input placeholder='Contact' type="text" required  value={contact} onChange={(e) => setContact(e.target.value)} maxLength={10}  className="form-control" id='desc' />
      
     </div>
     <div class="mb-3">
