@@ -21,6 +21,7 @@ function Design1() {
 const [skills, setSkills] = useState([])
 const [experiences, setExperiences] = useState([])
 const [education, setEducation] = useState([])
+const [certifications, setCertifications] = useState([])
 
   const config = {
     headers: {
@@ -38,6 +39,10 @@ const [education, setEducation] = useState([])
   const getExperiences = async () => {
     const expFromServer = await axios.get(apiUrl+'/cv/experiences', config)
     setExperiences(expFromServer.data)
+}
+  const getCertifications = async () => {
+    const expFromServer = await axios.get(apiUrl+'/cv/certifications', config)
+    setCertifications(expFromServer.data)
 }
 
    useEffect(() => {
@@ -68,6 +73,7 @@ const [education, setEducation] = useState([])
       getEducation();
       getSkills();
       getExperiences();
+      getCertifications();
   
   }, []);
 
@@ -156,6 +162,25 @@ const [education, setEducation] = useState([])
 	            <div class="r_ed_right">
 	              <p>{ex.company}</p>
 	              <p>{ex.responsibility} as <b>{ex.role}</b>.</p>
+	            </div>
+	          </li>
+          ))}
+	         
+	        </ul>
+	      </div>
+	      
+        <div class="r_education">
+	        <h4>Certifications</h4>
+	        <ul>
+          {certifications.map((edu, index) => ( 
+
+	          <li>
+	            <div class="r_ed_left">
+	              <p>{edu.degree}</p>
+	            </div>
+	            <div class="r_ed_right">
+	              <p>{edu.institution}</p>
+	              <p>Completed with {edu.grade} grade. </p>
 	            </div>
 	          </li>
           ))}
