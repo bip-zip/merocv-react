@@ -6,7 +6,7 @@ import apiUrl from '../../config';
 
 
 function Login() {
-  
+  console.log("The apiurl is: ", apiUrl)
   const navigate = useNavigate();
 const [username, setUsername] = useState('');
 const [password, setPassword] = useState('');
