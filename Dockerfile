@@ -1,11 +1,17 @@
-FROM node:18-alpine
+# Use a lightweight image as the base image
+FROM node:14-alpine
 
+# Set the working directory
 WORKDIR /merocv/
 
-COPY public/ /merocv/public
-COPY src/ /merocv/src
-COPY package.json /merocv/
+# Copy the build output from the repository
+COPY build/ ./build
 
-RUN npm install
+# Install serve globally
+RUN npm install -g serve
 
-CMD ["npm", "start"]
+# Expose port 3000
+EXPOSE 3000
+
+# Command to serve the app
+CMD ["serve", "-s", "build"]

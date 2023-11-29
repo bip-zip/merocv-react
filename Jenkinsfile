@@ -22,5 +22,12 @@ pipeline {
         sh 'docker rmi $repo:v$BUILD_NUMBER'
       }
     }
+    stage('Run Docker Container') {
+    steps {
+        script {
+             sh "docker run -d -p 3000:3000 $repo:v$BUILD_NUMBER"
+        }
+    }
+}
   }
 }
